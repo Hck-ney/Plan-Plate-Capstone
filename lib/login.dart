@@ -13,6 +13,7 @@ class _LoginState extends State<Login> {
   TextEditingController email = TextEditingController();
 
   TextEditingController password = TextEditingController();
+  bool isPasswordHidden = true;
 
   signIn() async {
     await FirebaseAuth.instance
@@ -57,18 +58,22 @@ class _LoginState extends State<Login> {
                     textAlign: TextAlign.left,
                   )),
               TextField(
+                  obscureText: isPasswordHidden,
                   controller: password,
                   decoration: InputDecoration(
                       //labelText: 'Password',
-                      //icon: Icon(Icons.account_circle_outlined)),
-                      )),
+                      suffixIcon: InkWell(onTap:
+                        _togglePassword
+                      ,child: Icon(Icons.visibility),)
+                      ),
+
+              ),
               Container(
-                margin: EdgeInsets.only(top: 10.0, bottom: 30.0),
+                margin: EdgeInsets.only(bottom: 30.0),
                 child: Align(
                   alignment: Alignment.centerRight, // Align to the right
-                  child: Text(
-                    'Forgot password?',
-                    textAlign: TextAlign.right,
+                  child: TextButton(
+                    onPressed: () {  }, child: Text("Forgot password?", textAlign: TextAlign.right,),
                   ),
                 ),
               ),
@@ -96,16 +101,17 @@ class _LoginState extends State<Login> {
                     IconButton(
                         onPressed: () {},
                         icon: Image.asset(
-                          'assets/google.png',
+                          'assets/images/google.png',
                           width: 48,
                           height: 48,
                         )),
                     IconButton(
                         onPressed: () {},
                         icon: Image.asset(
-                          'assets/facebook.png',
-                          width: 52,
-                          height: 52,
+                          'assets/images/facebook.png',
+                          width: 48
+                          ,
+                          height: 48,
                         )),
                   ],
                 ),
@@ -119,5 +125,19 @@ class _LoginState extends State<Login> {
         ),
       ),
     );
+
+  }
+  void _togglePassword (){
+    if(isPasswordHidden){
+      isPasswordHidden = false;
+    }
+    else{
+      isPasswordHidden = true;
+    }
+    setState(() {
+
+    });
   }
 }
+
+

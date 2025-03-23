@@ -32,11 +32,12 @@ dependencies:
     sdk: flutter
 
   # The following adds the Cupertino Icons font to your application.
-  # Use with the CupertinoIcons class for iOS style icons.
+  # Use with the CupertinoIcons class for iOS style navBar.
   cupertino_icons: ^1.0.8
   firebase_core: ^3.10.1
   firebase_auth: ^5.4.1
   font_awesome_flutter: ^10.8.0
+  intl: ^0.20.2
 
 dev_dependencies:
   flutter_test:
@@ -56,7 +57,7 @@ dev_dependencies:
 flutter:
 
   # The following line ensures that the Material Icons font is
-  # included with your application, so that you can use the icons in
+  # included with your application, so that you can use the navBar in
   # the material Icons class.
   uses-material-design: true
 
@@ -67,8 +68,11 @@ flutter:
   # An image assets can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/to/resolution-aware-images
   assets:
-    - assets/google.png
-    - assets/facebook.png
+    - assets/images/google.png
+    - assets/images/facebook.png
+    - assets/navBar/calendar.png
+    - assets/navBar/meal.png
+    - assets/navBar/cookbook.png
   # For details regarding adding assets from package dependencies, see
   # https://flutter.dev/to/asset-from-package
 
