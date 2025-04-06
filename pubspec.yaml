@@ -73,6 +73,9 @@ flutter:
     - assets/navBar/calendar.png
     - assets/navBar/meal.png
     - assets/navBar/cookbook.png
+    - assets/json/sample.json
+    - assets/navBar/inventory.png
+    - assets/navBar/shopping-cart.png
   # For details regarding adding assets from package dependencies, see
   # https://flutter.dev/to/asset-from-package
 
