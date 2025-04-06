@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_2/utils/appBar.dart';
+import 'package:flutter_2/utils/recipeBox.dart';
 
 class CookBook extends StatefulWidget {
   const CookBook({super.key});
@@ -14,7 +15,11 @@ class _CookBookState extends State<CookBook> {
     return Scaffold(
       appBar: customAppBar(),
       endDrawer: CustomEndDrawer(),
-      body: Text("This is Cook Book page"),
+      body: Column(
+        children: [
+          RecipeBox()
+        ],
+      ),
     );
   }
 }
