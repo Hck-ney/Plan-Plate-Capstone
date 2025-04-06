@@ -5,7 +5,6 @@ import 'package:flutter_2/pages/cookbook.dart';
 import 'package:flutter_2/pages/inventory.dart';
 import 'package:flutter_2/pages/planner.dart';
 import 'package:flutter_2/pages/shoppinglist.dart';
-import 'package:flutter_2/utils/group.dart';
 import 'package:flutter_2/func/logout.dart';
 import 'DateTime.dart';
 
