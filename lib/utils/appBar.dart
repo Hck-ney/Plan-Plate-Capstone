@@ -1,5 +1,6 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_2/login.dart';
 import 'package:flutter_2/pages/MealCalendar.dart';
 import 'package:flutter_2/pages/cookbook.dart';
 import 'package:flutter_2/pages/inventory.dart';
@@ -55,11 +56,11 @@ class _CustomEndDrawerState extends State<CustomEndDrawer> {
                     style: TextStyle(fontSize: 12, color: Colors.white),
                   ),
                   OutlinedButton(
-                    style: OutlinedButton.styleFrom(
-                      backgroundColor: Colors.white,
-                      side: BorderSide(color: Colors.blue),
-                      minimumSize: Size(250, 40)
-                    ),
+                      style: OutlinedButton.styleFrom(
+                          backgroundColor: Colors.white,
+                          side: BorderSide(color: Colors.blue),
+                          minimumSize: Size(250, 40)
+                      ),
                       onPressed: () {
                         logoutUser();
                       }
@@ -127,5 +128,18 @@ class _CustomEndDrawerState extends State<CustomEndDrawer> {
         ],
       ),
     );
+  }
+
+  void logoutUser() async {
+    try {
+      await FirebaseAuth.instance.signOut();
+      Navigator.pushReplacement(
+        context,
+        MaterialPageRoute(builder: (context) => const Login()),
+      );
+      // Navigate to login screen or do something else
+    } catch (e) {
+
+    }
   }
 }

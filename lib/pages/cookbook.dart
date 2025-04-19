@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_2/firestore.dart';
 import 'package:flutter_2/utils/appBar.dart';
 import 'package:flutter_2/utils/recipeBox.dart';
 
@@ -15,10 +16,15 @@ class _CookBookState extends State<CookBook> {
     return Scaffold(
       appBar: customAppBar(),
       endDrawer: CustomEndDrawer(),
-      body: Column(
-        children: [
-          RecipeBox()
-        ],
+      body: SingleChildScrollView(
+        child: Column(
+          children: [
+            SizedBox(
+              height: MediaQuery.of(context).size.height, // or some fixed height
+              child: ItemList(),
+            ),
+          ],
+        ),
       ),
     );
   }
