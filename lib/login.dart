@@ -1,6 +1,7 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:google_sign_in/google_sign_in.dart';
 
 class Login extends StatefulWidget {
   const Login({super.key});
@@ -58,22 +59,25 @@ class _LoginState extends State<Login> {
                     textAlign: TextAlign.left,
                   )),
               TextField(
-                  obscureText: isPasswordHidden,
-                  controller: password,
-                  decoration: InputDecoration(
-                      //labelText: 'Password',
-                      suffixIcon: InkWell(onTap:
-                        _togglePassword
-                      ,child: Icon(Icons.visibility),)
-                      ),
-
+                obscureText: isPasswordHidden,
+                controller: password,
+                decoration: InputDecoration(
+                    //labelText: 'Password',
+                    suffixIcon: InkWell(
+                  onTap: _togglePassword,
+                  child: Icon(Icons.visibility),
+                )),
               ),
               Container(
                 margin: EdgeInsets.only(bottom: 30.0),
                 child: Align(
                   alignment: Alignment.centerRight, // Align to the right
                   child: TextButton(
-                    onPressed: () {  }, child: Text("Forgot password?", textAlign: TextAlign.right,),
+                    onPressed: () {},
+                    child: Text(
+                      "Forgot password?",
+                      textAlign: TextAlign.right,
+                    ),
                   ),
                 ),
               ),
@@ -84,8 +88,8 @@ class _LoginState extends State<Login> {
                   width: double.infinity,
                   child: ElevatedButton(
                       onPressed: (() => signIn()),
-                      style:
-                          ElevatedButton.styleFrom(backgroundColor: Colors.blue),
+                      style: ElevatedButton.styleFrom(
+                          backgroundColor: Colors.blue),
                       child: Text(
                         "Login",
                         style: TextStyle(color: Colors.white),
@@ -99,18 +103,21 @@ class _LoginState extends State<Login> {
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     IconButton(
-                        onPressed: () {},
+                        onPressed: () {
+                          signInWithGoogle();
+                        },
                         icon: Image.asset(
                           'assets/images/google.png',
                           width: 48,
                           height: 48,
                         )),
                     IconButton(
-                        onPressed: () {},
+                        onPressed: () {
+
+                        },
                         icon: Image.asset(
                           'assets/images/facebook.png',
-                          width: 48
-                          ,
+                          width: 48,
                           height: 48,
                         )),
                   ],
@@ -125,19 +132,27 @@ class _LoginState extends State<Login> {
         ),
       ),
     );
-
   }
-  void _togglePassword (){
-    if(isPasswordHidden){
+
+  void _togglePassword() {
+    if (isPasswordHidden) {
       isPasswordHidden = false;
-    }
-    else{
+    } else {
       isPasswordHidden = true;
     }
-    setState(() {
+    setState(() {});
+  }
 
-    });
+  signInWithGoogle() async {
+    GoogleSignInAccount? googleUser = await GoogleSignIn().signIn();
+
+    GoogleSignInAuthentication? googleAuth = await googleUser?.authentication;
+
+    AuthCredential credential = GoogleAuthProvider.credential(
+        accessToken: googleAuth?.accessToken, idToken: googleAuth?.idToken);
+
+    UserCredential userCredential =
+        await FirebaseAuth.instance.signInWithCredential(credential);
+    print(userCredential.user?.displayName);
   }
 }
-
-
