@@ -37,6 +37,7 @@ class CustomEndDrawer extends StatefulWidget {
 
 class _CustomEndDrawerState extends State<CustomEndDrawer> {
   User? user = FirebaseAuth.instance.currentUser;
+  bool _customIcon = false;
 
   @override
   Widget build(BuildContext context) {
@@ -59,12 +60,10 @@ class _CustomEndDrawerState extends State<CustomEndDrawer> {
                       style: OutlinedButton.styleFrom(
                           backgroundColor: Colors.white,
                           side: BorderSide(color: Colors.blue),
-                          minimumSize: Size(250, 40)
-                      ),
+                          minimumSize: Size(250, 40)),
                       onPressed: () {
                         logoutUser();
-                      }
-                      ,
+                      },
                       child: Text(
                         "Log Out",
                         style: TextStyle(color: Colors.blue),
@@ -125,6 +124,24 @@ class _CustomEndDrawerState extends State<CustomEndDrawer> {
                   builder: (context) => const ShoppingList()));
             },
           ),
+          ExpansionTile(
+            title: Text('Groups'),
+            onExpansionChanged: (bool expanded) {},
+            controlAffinity: ListTileControlAffinity.leading,
+            children: const <Widget>[
+              ListTile(
+                title: Text('Group 1'),
+              ),
+              ListTile(
+                title: Text('Join Group'),
+                leading: Icon(Icons.accessibility),
+              ),
+              ListTile(
+                title: Text('Create Group'),
+                leading: Icon(Icons.add),
+              ),
+            ],
+          )
         ],
       ),
     );
@@ -138,8 +155,23 @@ class _CustomEndDrawerState extends State<CustomEndDrawer> {
         MaterialPageRoute(builder: (context) => const Login()),
       );
       // Navigate to login screen or do something else
-    } catch (e) {
-
-    }
+    } catch (e) {}
   }
+}
+
+class BasicTile {
+  final String title;
+  final List<BasicTile> tiles;
+
+  const BasicTile({required this.title, this.tiles = const []});
+}
+
+final basicTiles = <BasicTile>[
+  const BasicTile(
+      title: 'Fruits',
+      tiles: [BasicTile(title: 'title'), BasicTile(title: 'title')])
+];
+
+Widget buildTile(BasicTile tile) {
+  return ExpansionTile(title: Text('data'));
 }
